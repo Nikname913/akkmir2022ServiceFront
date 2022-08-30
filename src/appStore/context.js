@@ -1,0 +1,13 @@
+import React from 'react'
+export const WarehousesContext = React.createContext()
+export const WritingsContext = React.createContext()
+export const UserNameContext = React.createContext()
+export const UserSecondNameContext = React.createContext()
+export const CarContext = React.createContext()
+export const UserNumberContext = React.createContext()
+export const UserMailContext = React.createContext()
+export const CarModelContext = React.createContext()
+export const UserServiceContext = React.createContext()
+export const UserWarehouseContext = React.createContext()
+export const UserDateContext = React.createContext()
+export const UserTimeContext = React.createContext()

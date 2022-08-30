@@ -1,7 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
+import { WarehousesContext, WritingsContext } from '../appStore/context'
 
 const RequestActionsComponent = (props) => {
+
+  const [ ,setWrhs ] = useContext(WarehousesContext)
+  const [ ,setWritings ] = useContext(WritingsContext)
 
   const { make = true,
     callbackAction,
@@ -11,35 +15,57 @@ const RequestActionsComponent = (props) => {
       reqbody = null
     }} = props
 
-  useEffect( async () => {
+  useEffect(() => {
 
-    false && console.log(callbackAction)
+    async function request() {
 
-    const requestType = type
-    switch(requestType) {
-      
-      case 'GET':
+      false && console.log(callbackAction)
 
-        const response = await fetch(urlstring)
+      const requestType = type
+      switch(requestType) {
+        
+        case 'GET':
 
-        if ( response.status === 200 ) {
+          const response = await fetch(urlstring)
 
-          const data = await fetch(urlstring).then(data => data.json())
-          return data
-      
-        }
+          if ( response.status === 200 ) {
 
-        break
+            const data = await fetch(urlstring).then(data => data.json())
 
-      case 'POST':
+            if ( callbackAction === 'GET_WAREHOUSES' ) {
 
-        reqbody && console.log(reqbody)
-        break
+              const arr = data.data.warehouses.warehouse
+              setWrhs(arr)
 
-      default:
-        break
+            }
 
-    }
+            if ( callbackAction === 'GET_WRITINGS' ) {
+
+              setWritings(data)
+
+            }
+        
+          }
+
+          break
+
+        case 'POST':
+
+          await fetch(urlstring, {
+            method: 'POST',
+            headers: { "Content-type": "application/x-www-form-urlencoded; charset=UTF-8" }, 
+            body: reqbody
+          })
+
+          break
+
+        default:
+          break
+
+    }}
+
+    request()
+
   },[ make ])
 
   return <React.Fragment/>
