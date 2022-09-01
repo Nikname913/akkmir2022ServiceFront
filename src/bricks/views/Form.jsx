@@ -76,6 +76,7 @@ function Form() {
   const [ reqbody, setReqbody ] = useState()
   const [ sendNewWriting, setSendNewWriting ] = useState(false)
   const [ nonChoiseTime, setNonChoiseTime ] = useState([])
+  const [ nowMonth, setNowMonth ] = useState()
 
   console.log(writings)
 
@@ -475,41 +476,43 @@ function Form() {
           <RightColumn>
 
             <h4 style={{ color: '#858585', fontSize: '22px', display: 'block' }}>Шаг 4</h4>
-            <span 
-              style={{ 
-                color: 'white', 
-                fontSize: '16px', 
-                display: 'block', 
-                positions: 'relative',
-                marginTop: '8px', 
-                fontWeight: 'bold', 
-                width: '100%',
-              }}>
-              
-              Выберите дату
+            <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+              <span 
+                style={{ 
+                  color: 'white', 
+                  fontSize: '16px', 
+                  display: 'block', 
+                  positions: 'relative',
+                  marginTop: '8px', 
+                  fontWeight: 'bold', 
+                  width: '100%',
+                }}>
+                
+                Выберите дату
+                
+              </span>
               <div
                 style={{
                   display: 'flex',
                   flexDirection: 'row',
                   alignItems: 'center',
                   justifyContent: 'space-between', 
-                  position: 'absolute',
-                  width: '160px',
-                  left: '100%',
-                  marginLeft: '-160px',
-                  top: '50%',
-                  marginTop: '8px',
+                  position: 'relative',
+                  width: '100px',
                   fontSize: '14px',
+                  color: 'white',
+                  fontWeight: 'bold',
+                  textAlign: 'center',
+                  marginRight: '8px'
                 }}
               >
-                <span></span>
-                <span style={{ textAlign: 'center' }}></span>
-                <span></span>
+                <span style={{ fontSize: '16px' }}>*</span>
+                <span style={{ textAlign: 'center' }}>{ nowMonth }</span>
+                <span style={{ fontSize: '16px' }}>*</span>
               </div>
-              
-            </span>
+            </div>
 
-            <Datepicker></Datepicker>
+            <Datepicker setMonth={setNowMonth}></Datepicker>
             <LeftColumnContentBlock 
               style={{
                 display: 'flex',
