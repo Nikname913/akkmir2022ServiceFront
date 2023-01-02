@@ -122,6 +122,52 @@ const Datepicker = (props) => {
 
     } 
 
+    d.setDate(d.getDate() + 31)
+
+    if ( month === d.getMonth() ) { /* в месяце 30 дней */ } else {
+
+      let daysArray = Array(FIRST_DAY).fill({ date: 0, background: '#666666' });
+
+      if ( month === 0 ) month = 'Янв'
+      if ( month === 1 ) month = 'Фев'
+      if ( month === 2 ) month = 'Март'
+      if ( month === 3 ) month = 'Апр'
+      if ( month === 4 ) month = 'Мая'
+      if ( month === 5 ) month = 'Июня'
+      if ( month === 6 ) month = 'Июля'
+      if ( month === 7 ) month = 'Авг'
+      if ( month === 8 ) month = 'Сен'
+      if ( month === 9 ) month = 'Окт'
+      if ( month === 10 ) month = 'Ноя'
+      if ( month === 11 ) month = 'Дек'
+
+      for ( let i = 0; i < 30; i++ ) {
+
+        let indexDate = i + 1
+        daysArray.push({ 
+          date: indexDate, 
+          background: '#858585',
+          month
+        })
+
+      }
+
+      let delta = 35 - daysArray.length
+
+      for ( let i = 0; i < delta; i++ ) {
+
+        daysArray.push({ date: 0, background: '#666666' })
+
+      }
+
+      console.log('в этом месяце 30 дней')
+      console.log(daysArray)
+
+      setDays(daysArray)
+      setMonth(month)
+
+    } 
+
   },[ days ])
 
   return (
